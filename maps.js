@@ -75,3 +75,5 @@ function printPlayerMap(map,el,player=""){
 
 printPlayerMap(playerMap,playersMap)
 printPlayerMap(enemyMap,enemiesMap,'enemy')
+
+var gameTiles = document.querySelectorAll(".gametile");

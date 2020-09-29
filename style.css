@@ -72,7 +72,8 @@
     border:1px solid black;
     display:grid;
     background:rgb(88, 155, 218);
-    grid-template-columns:repeat(12,1fr)
+    grid-template-columns:repeat(12,1fr);
+    overflow:auto;
 }
 
 .gametile{
@@ -82,6 +83,7 @@
 }
 
 .water{
+    
     background:rgb(88, 155, 218);
 }
 
@@ -107,10 +109,17 @@
 
 
 .playersstats{
-    width:30%;
-    height:100%;
+    width:100%;
+    height:30%;
     border:1px solid red;
     background:lightgray;
+    display:flex;
+    align-items:center;
+    justify-content: space-evenly;
+    position:absolute;
+    top:80%;
+    left:0;
+    z-index:2;
 }
 
 
@@ -124,9 +133,16 @@
 }
 
 .playersattackrow{
-    height:20%;
-    width:100%;
+    height:65%;
+    width:30%;
     border:1px solid red;
+    /* top:10%; */
+    flex-direction:column;
+    display:flex;
+    align-items:center;
+    position:absolute;
+    top:10%;
+    left:70%;
     background:linear-gradient(to right,gray,lightgray)
 
 }
@@ -135,11 +151,15 @@
     text-align:center;
 }
 
-.playersrowbody{
+.colDiv{
+    height:30%;
+}
+
+/* .playersrowbody{
     display:flex;
     align-items:center;
     justify-content: space-evenly;
-}
+} */
 
 .attack_input{
     top:15px;
@@ -160,6 +180,7 @@
     cursor:pointer;
     border-radius:50%;
     left:50%;
+    top:-25px;
     outline:none;
 }
 
@@ -214,9 +235,21 @@
     background-repeat:no-repeat;
     align-items:center;
     justify-content: space-evenly;
+    display:none;
+    transition:1s ease;
 }
 
 .message{
     left:35%;
     width:25%;
 }
+
+
+ @media screen and (min-height:550px){
+    .gametile{
+        width:85px;
+    }
+    .gun{
+        left:5%;
+    }
+} 
