@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Game Page</title>
+</head>
+<body>
+    <div class="gamearea">
+        <div class="gametoprow">
+            <h1 class='gametoph1'>Battleship Game</h1>
+        </div>
+        <div class="gameflex">
+            <div class="playersmap">
+                <!-- <div class="playersboatmap"></div> -->
+            </div>
+            <div class="playersstats">
+                <div class="playercard">
+                    <h5 class='h5playerstatheader'>Player:</h5>
+                    <h5>Hits:<span class='hits'></span></h5>
+                    <h5>Misses:<span class='misses'></span></h5>
+                    <h5>Success:<span class='success'>0</span>%</h5>
+                </div>
+                <div class="enemycard">
+                    <h5 class='h5enemystatheader'>Enemy:</h5>
+                    <h5>Hits:<span class='enemy_hits'></span></h5>
+                    <h5>Misses:<span class='enemy_misses'></span></h5>
+                    <h5>Success:<span class='enemy_success'>0</span>%</h5>
+                </div>
+            </div>
+        </div>
+             <div class="playersattackrow">
+                 <div class="playersrowtop">
+                 <h3>☢ War Room 💣</h3>
+                 </div>
+
+                 <div class="playersrowbody">
+                 <div class="inputDiv">
+                 <label for="x">X-Coord</label>
+                 <br/>
+                 <input type="number" id="x" step="1" min="0" max="11" name="x" class="attack_input" placeholder="x-coord">
+                </div>
+
+                <div class="inputDiv">
+                 <label for="y">Y-Coord</label>
+                 <br/>
+                 <input type="number" id="y" step="1" min="0" max="11" name="y" class="attack_input" placeholder="y-coord">
+                 </div>
+
+                 <div class="coordDiv">
+                     <h5>Launch Coordinates:</h5>
+                     <h5>X:<span class="x"></span></h5>
+                     <h5>Y:<span class="y"></span></h5>
+                     <button class="launchBtn">Launch</button>
+                 </div>
+
+                 </div>
+             </div>
+    </div>
+
+    <div class="enemysContainer">
+        <div class="enemytoprow">
+            <h5>Enemys Map</h5>
+        </div>
+        <div class="enemy-map"></div>
+    </div>
+
+    <div class="alertModal">
+        <h1 class='message'>HIT!!</h1>
+    </div>
+
+
+    <script src="maps.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
