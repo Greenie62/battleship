@@ -32,14 +32,20 @@ function launchAttack(){
     xDOM.innerHTML=x;
     yDOM.innerHTML=y;
 
+    xInput.value=""
+    yInput.value=""
 
-    hitDetection(y,x)
 
-    coordTranslator(y,x)
+
+   let idx = coordTranslator(y,x)
+
+
+   hitDetection(y,x,idx)
+
 }
 
 
-function changeDOM(result){
+function updateStats(result){
     playerCounter++;
     if(result === 1){
         playerHits++;
@@ -53,7 +59,7 @@ function changeDOM(result){
 
 
 
-function hitDetection(y,x){
+function hitDetection(y,x,idx){
     let result=0
     if(enemyMap[y][x] === 0){
         console.log("Miss");
@@ -61,10 +67,17 @@ function hitDetection(y,x){
     }
     else{
         toggleModal(alertModal,"Hit!")
+        // let redDot=document.createElement("div");
+        // redDot.className = 'red'
+        // playerTiles[idx].appendChild(redDot)
         result=1
     }
 
-    changeDOM(result)
+
+    let redDot=document.createElement("div");
+    redDot.className = 'red'
+    enemyTiles[idx].appendChild(redDot)
+    updateStats(result)
     
 }
 
@@ -78,17 +91,17 @@ function toggleModal(modal,msg){
 }
 
 
-function coordTranslator(x,y){
+function coordTranslator(y,x){
     let idx=0;
     [y,x] = [parseInt(y),parseInt(x)];
     while(y > 0){
-        idx+=11;
         y--
+        idx+=12;
     }
 
-    while(x >0){
-        idx +=1;
+    while(x > 0){
         x--
+        idx +=1;
     }
 
     console.log("Idx: " + idx);

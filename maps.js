@@ -40,7 +40,12 @@ function printPlayerMap(map,el,player=""){
     map.forEach((row,y)=>{
         row.forEach((value,x)=>{
             let gameTile = document.createElement("div");
+            if(player === ""){
             gameTile.className = "gametile"
+            }
+            else{
+                gameTile.className = "enemyTile"
+            }
 
             if(value === 0){
                 gameTile.className += " water"
@@ -76,4 +81,8 @@ function printPlayerMap(map,el,player=""){
 printPlayerMap(playerMap,playersMap)
 printPlayerMap(enemyMap,enemiesMap,'enemy')
 
-var gameTiles = document.querySelectorAll(".gametile");
+var playerTiles = document.querySelectorAll(".gametile");
+var enemyTiles = document.querySelectorAll(".enemyTile");
+
+
+console.log(playerTiles.length,enemyTiles.length)

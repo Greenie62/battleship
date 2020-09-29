@@ -76,10 +76,23 @@
     overflow:auto;
 }
 
-.gametile{
+.gametile, .enemyTile{
     height:58px;
     width:25px;
     /* border:1px solid black; */
+}
+
+.enemyTile{
+    width:10px;
+    height:10px;
+}
+
+
+.red{
+    height:40px;
+    width:40px;
+    border-radius:25%;
+    background:red;
 }
 
 .water{
@@ -189,31 +202,35 @@
 
 
 .enemysContainer{
-    height:400px;
-    width:75%;
-    left:15%;
-    top:-500px;
+    height:100%;
+    width:150px;
+    left:-20px;
+    /* top:-150px; */
     border:2px solid black;
-    z-index:2;
-    display:none;
+    z-index:3;
+    background:rgb(88, 155, 218);
+
+    /* display:none; */
     pointer-events:none;
 }
 
 .enemytoprow{
     text-align:center;
-    width:100%;
+    width:125px;
     background:red;
     border:1px solid black;
 
 }
 
 .enemy-map{
-    width:100%;
+    width:100px;
+    height:100px;
     z-index:2;
     border:1px solid black;
     display:grid;
     background:rgb(88, 155, 218);
-    grid-template-columns:repeat(12,1fr)
+    grid-template-columns:repeat(12,1fr);
+   
 }
 
 .enemy{
