@@ -14,6 +14,8 @@ let hitsDOM=document.querySelector(".hits")
 let missesDOM=document.querySelector(".misses")
 let successDOM=document.querySelector(".success")
 let messageDOM=document.querySelector(".message")
+let alertImageDOM=document.querySelector(".alertModal")
+let hitsImagesArray=['./assets/hit2.jpg',"./assets/hit3.jpg","./assets/hitbattleship.jpg"]
 
 let computerCounter=0;
 let computerHits=0;
@@ -26,8 +28,8 @@ launchBtn.onclick=launchAttack;
 
 
 function launchAttack(){
-    let x = xInput.value,
-        y = yInput.value
+    let x = parseInt(xInput.value),
+        y = parseInt(yInput.value)
     console.log(`X:${x},Y:${y}`)
     xDOM.innerHTML=x;
     yDOM.innerHTML=y;
@@ -74,17 +76,51 @@ function hitDetection(y,x,idx){
     }
 
 
+   
+    renderDamage(enemyTiles,idx)
+    updateStats(result)
+    if(checkIfBoatSunk(enemyMap,y,x)){
+        console.log("you sunk their boat!!")
+    }
+    
+}
+
+
+function renderDamage(tiles,idx){
+
     let redDot=document.createElement("div");
     redDot.className = 'red'
-    enemyTiles[idx].appendChild(redDot)
-    updateStats(result)
-    
+    tiles[idx].appendChild(redDot)
+
+}
+
+
+function checkIfBoatSunk(map,y,x){
+    let isSunk=true;
+    if(map[y+1][x] !== 0){
+        isSunk=false;
+    }
+    if(map[y][x+1] !== 0){
+        isSunk=false;
+    }
+
+    return isSunk;
 }
 
 
 function toggleModal(modal,msg){
     modal.style.display='block'
     messageDOM.innerHTML=msg
+    
+    if(msg == "Hit!"){
+    alertImageDOM.style.backgroundImage=`url(${hitsImagesArray[hitsImagesArray.length * Math.random() | 0]})`
+    }
+
+    else{
+        alertImageDOM.style.backgroundImage=`url('./assets/battle3.jpg')`
+    }
+
+
     setTimeout(()=>{
         modal.style.display='none'
     },1500)
@@ -93,7 +129,7 @@ function toggleModal(modal,msg){
 
 function coordTranslator(y,x){
     let idx=0;
-    [y,x] = [parseInt(y),parseInt(x)];
+   
     while(y > 0){
         y--
         idx+=12;
