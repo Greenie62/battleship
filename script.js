@@ -7,20 +7,56 @@ var yInput =document.querySelector("input[name='y']");
 var xDOM=document.querySelector(".x")
 var yDOM=document.querySelector(".y")
 
-let playerCounter=0;
+// init game values
+let playerAttacksTotal=0;
 let playerHits=0;
 let playerSuccess=0;
-let hitsDOM=document.querySelector(".hits")
-let missesDOM=document.querySelector(".misses")
-let successDOM=document.querySelector(".success")
-let messageDOM=document.querySelector(".message")
-let alertImageDOM=document.querySelector(".alertModal")
-let hitsImagesArray=['./assets/hit2.jpg',"./assets/hit3.jpg","./assets/hitbattleship.jpg"]
+let playerKills =0;
+let enemyCount = 7
 
-let computerCounter=0;
+let computerAttackTotal=0;
 let computerHits=0;
 let computerSuccess=0;
+let computerKills=0;
+let playerCount=7;
 
+// DOM elements 
+let hitsDOM=document.querySelector(".hits")
+let totalAttacksDOM=document.querySelector(".total-player-attacks")
+let successDOM=document.querySelector(".success")
+let killsDOM=document.querySelector(".kills")
+let enemyCountDOM=document.querySelector(".enemycount")
+let messageDOM=document.querySelector(".message")
+let alertImageDOM=document.querySelector(".alertModal")
+
+let enemysKillsDOM = document.querySelector(".enemysKills")
+let playerShipCounterDOM = document.querySelector(".playerShipCount")
+let enemyHitsDOM=document.querySelector(".enemy-hits")
+let enemyTotalAttacksDOM=document.querySelector(".enemy-total-attacks")
+let enemySuccessDOM=document.querySelector(".enemy-success")
+let hitsImagesArray=['./assets/hit2.jpg',"./assets/hit3.jpg","./assets/hitbattleship.jpg"]
+
+
+
+
+function initGameValues(){
+
+    hitsDOM.innerHTML=playerHits;
+    totalAttacksDOM.innerHTML=playerAttacksTotal
+    killsDOM.innerHTML=playerKills;
+    enemyCountDOM.innerHTML=enemyCount;
+    successDOM.innerHTML=playerSuccess
+
+
+    enemyHitsDOM.innerHTML=computerHits;
+    enemyTotalAttacksDOM.innerHTML=computerAttackTotal;
+    enemySuccessDOM.innerHTML=computerSuccess;
+    enemysKillsDOM.innerHTML=computerKills;
+    // enemyCountDOM.innerHTML=playerCount;
+    playerShipCounterDOM.innerHTML=playerCount
+}
+
+initGameValues()
 
 
 
@@ -44,17 +80,22 @@ function launchAttack(){
 
    hitDetection(y,x,idx)
 
+
+   setTimeout(()=>{
+       computersTurn()
+   },1200)
+
 }
 
 
 function updateStats(result){
-    playerCounter++;
+    playerAttacksTotal++;
     if(result === 1){
         playerHits++;
     }
-    playerSuccess = (playerHits / playerCounter).toFixed(2);
+    playerSuccess = (playerHits / playerAttacksTotal).toFixed(2);
     console.log("Success: " + playerSuccess)
-    missesDOM.innerHTML=playerCounter;
+    totalAttacksDOM.innerHTML=playerAttacksTotal;
     hitsDOM.innerHTML=playerHits;
     successDOM.innerHTML=playerSuccess;
 }
@@ -81,9 +122,28 @@ function hitDetection(y,x,idx){
     updateStats(result)
     if(checkIfBoatSunk(enemyMap,y,x)){
         console.log("you sunk their boat!!")
+        toggleModal(alertModal,"Ship is Sunk! ☠︎")
+        sinkShip()
     }
     
 }
+
+
+
+
+
+function sinkShip(){
+    enemyCount--;
+    playerKills++
+    enemyCountDOM.innerHTML=enemyCount;
+    killsDOM.innerHTML=playerKills
+
+    if(enemyCount === 0){
+        console.log("Congrats, you have made the sea a safe place to sail again!:)")
+    }
+}
+
+
 
 
 function renderDamage(tiles,idx){
@@ -93,6 +153,8 @@ function renderDamage(tiles,idx){
     tiles[idx].appendChild(redDot)
 
 }
+
+
 
 
 function checkIfBoatSunk(map,y,x){
@@ -114,6 +176,7 @@ function toggleModal(modal,msg){
     
     if(msg == "Hit!"){
     alertImageDOM.style.backgroundImage=`url(${hitsImagesArray[hitsImagesArray.length * Math.random() | 0]})`
+    toggleEnemyMap()
     }
 
     else{
@@ -142,4 +205,18 @@ function coordTranslator(y,x){
 
     console.log("Idx: " + idx);
     return idx;
+}
+
+
+
+function computersTurn(){
+    console.log("Computer is taking a turn!")
+    let xRandom=Math.random() * 12 | 0;
+    let yRandom=Math.random() * 12 | 0;
+
+    let compIdx = coordTranslator(yRandom,xRandom);
+
+    console.log(`X:${xRandom},Y:${yRandom},Idx:${compIdx}`)
+
+
 }

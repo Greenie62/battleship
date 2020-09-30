@@ -1,6 +1,7 @@
 var playersMap = document.querySelector(".playersmap");
 var enemiesMap = document.querySelector(".enemy-map");
-
+var enemyContainer =document.querySelector(".enemysContainer")
+enemyContainer.style.display='none'
 console.log(playersMap);
 
 
@@ -83,6 +84,15 @@ printPlayerMap(enemyMap,enemiesMap,'enemy')
 
 var playerTiles = document.querySelectorAll(".gametile");
 var enemyTiles = document.querySelectorAll(".enemyTile");
+
+
+
+function toggleEnemyMap(){
+    enemyContainer.style.display='block'
+    setTimeout(()=>{
+        enemyContainer.style.display='none'
+    },1500)
+}
 
 
 console.log(playerTiles.length,enemyTiles.length)
