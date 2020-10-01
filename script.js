@@ -107,6 +107,8 @@ function hitDetection(y,x,idx){
     if(enemyMap[y][x] === 0){
         console.log("Miss");
         toggleModal(alertModal,"Miss!")
+        renderDamage(enemyTiles,idx,'temporary')
+
     }
     else{
         toggleModal(alertModal,"Hit!")
@@ -114,17 +116,20 @@ function hitDetection(y,x,idx){
         // redDot.className = 'red'
         // playerTiles[idx].appendChild(redDot)
         result=1
-    }
+    
 
 
    
     renderDamage(enemyTiles,idx)
-    updateStats(result)
-    if(checkIfBoatSunk(enemyMap,y,x)){
+    if(checkIfBoatSunk(enemyMap,y,x,enemyTiles,idx)){
         console.log("you sunk their boat!!")
         toggleModal(alertModal,"Ship is Sunk! ☠︎")
         sinkShip()
     }
+}
+
+updateStats(result)
+
     
 }
 
@@ -146,25 +151,52 @@ function sinkShip(){
 
 
 
-function renderDamage(tiles,idx){
+function renderDamage(tiles,idx,status=""){
 
     let redDot=document.createElement("div");
     redDot.className = 'red'
     tiles[idx].appendChild(redDot)
+
+    if(status !== ""){
+        setTimeout(()=>{
+        tiles[idx].innerHTML=""
+        },1000);
+    }
 
 }
 
 
 
 
-function checkIfBoatSunk(map,y,x){
+function checkIfBoatSunk(map,y,x,enemyTiles,idx){
+    console.log(enemyTiles[idx-1].children)
     let isSunk=true;
     if(map[y+1][x] !== 0){
+        isSunk=false;
+    }
+    if(map[y-1][x] !== 0 && !enemyTiles[idx-11].children.length){
         isSunk=false;
     }
     if(map[y][x+1] !== 0){
         isSunk=false;
     }
+
+    if(map[y][x-1] !== 0 && !enemyTiles[idx-1].children.length){
+        isSunk=false;
+    }
+
+    // if(map[y][x-2] !== 0 && !enemyTiles[idx-2].children.length){
+    //     isSunk=false;
+    // }
+    // if(map[y-2][x] !== 0 && !enemyTiles[idx-22].children.length){
+    //     isSunk=false;
+    // }
+    // if(map[y][x-3] !== 0 && !enemyTiles[idx-3].children.length){
+    //     isSunk=false;
+    // }
+    // if(map[y-3][x] !== 0 && !enemyTiles[idx-33].children.length){
+    //     isSunk=false;
+    // }
 
     return isSunk;
 }
@@ -176,7 +208,7 @@ function toggleModal(modal,msg){
     
     if(msg == "Hit!"){
     alertImageDOM.style.backgroundImage=`url(${hitsImagesArray[hitsImagesArray.length * Math.random() | 0]})`
-    toggleEnemyMap()
+    // toggleEnemyMap()
     }
 
     else{

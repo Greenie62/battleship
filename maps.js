@@ -1,7 +1,7 @@
 var playersMap = document.querySelector(".playersmap");
 var enemiesMap = document.querySelector(".enemy-map");
 var enemyContainer =document.querySelector(".enemysContainer")
-enemyContainer.style.display='none'
+// enemyContainer.style.display='none'
 console.log(playersMap);
 
 

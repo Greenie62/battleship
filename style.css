@@ -269,4 +269,14 @@
     .gun{
         left:5%;
     }
+
+   
 } 
+
+
+@media screen and (max-width:550px){
+    .enemysContainer{
+        top:-390px;
+        left:-400px;
+    }
+}
